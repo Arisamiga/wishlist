@@ -9,6 +9,6 @@ module.exports = {
         client.user.setPresence({
             activities: [{ name: `Aris's Wishlist`, type: ActivityType.Watching }],
             status: 'online',
-          });
+        });
 	},
 };
