@@ -62,10 +62,10 @@ module.exports = {
                             await git.add('../');
                             await git.commit(`Added ${itemRemoved} to the wishlist`);
                             await git.push('origin', 'main');
-                            await interaction.reply({ content: `Item: ${name} Added and Uploaded!`, ephemeral: false });
+                            return true;
                         } catch (err) {
                             console.error(err);
-                            await interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });
+                            return false;
                         }
                     }
 
@@ -76,8 +76,11 @@ module.exports = {
                             interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });
                             return;
                         }
-                        else{
-                            uploadChanges(name);
+                        else {
+                            if(uploadChanges(name))
+                                interaction.reply({ content: `Item: ${name} Added and Uploaded!`, ephemeral: false });
+                            else
+                                interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });
                         }
                     });
                 });
