@@ -37,10 +37,9 @@ module.exports = {
                     await git.add('../');
                     await git.commit(`Removed ${itemRemoved} from wishlist`);
                     await git.push('origin', 'main');
-                    await interaction.editReply({ content: `Removed Item and Updated: ${choice.values[0]}`, components: [] });
-                    await choice.reply({ content: 'Item removed', ephemeral: true });
+                    return true;
                 } catch (err) {
-                    await interaction.editReply({ content: `Failed to Remove and Upload Item: ${choice.values[0]}`, components: [] });
+                    return false;
                 }
             }
 
@@ -71,7 +70,14 @@ module.exports = {
                         return;
                     }
                     else{
-                        uploadChanges(choice.values[0]);
+                        if(uploadChanges(choice.values[0])) {
+                            interaction.editReply({ content: `Removed Item and Updated: ${choice.values[0]}`, components: [] });
+                            choice.reply({ content: 'Item removed', ephemeral: true });
+                        }
+                        else {
+                            choice.reply({ content: 'Failed to remove item', ephemeral: true });
+                            interaction.editReply({ content: `Failed to Remove and Upload Item: ${choice.values[0]}`, components: [] });
+                        }
                     }
                 });
 
