@@ -1,6 +1,6 @@
 # Wishlist
 
-### This project consists of a website and a Discord bot that work together to manage a wishlist. The website displays the wishlist items, and the Discord bot allows the user to interact with the wishlist through various commands such as adding, removing, and listing items.
+### This project consists of a website and a Discord bot that work together to manage a wishlist.
 
 <img src="https://i.imgur.com/P6cl2JD.png" alt="Wishlist" width="100%">
 
