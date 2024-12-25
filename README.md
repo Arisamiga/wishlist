@@ -2,6 +2,10 @@
 
 ### This project consists of a website and a Discord bot that work together to manage a wishlist. The website displays the wishlist items, and the Discord bot allows the user to interact with the wishlist through various commands such as adding, removing, and listing items.
 
+<img src="https://i.imgur.com/P6cl2JD.png" alt="Wishlist" width="100%">
+
+<img src="https://i.imgur.com/HowUixb.png" alt="Wishlist Dark Mode" width="100%">
+
 ## Project Structure
 
 - **/Website/**: Contains the frontend code for displaying the wishlist.
@@ -49,7 +53,7 @@ The Discord bot allows users to manage the wishlist through various commands and
 - `interactionCreate.js`: Handles interactions with the bot, such as commands and modals.
 - `ready.js`: Sets the bot's presence and logs when the bot is ready.
 
-## Installation
+### Installation
 ```
 You have to install NodeJS and Git.
 Create a folder.
@@ -61,10 +65,13 @@ Press enter.
 When you see all Github files in your folder you installed the bot files succesfully.
 After that you would want to edit the config.json.
 ```
+
 Navigate to the `Discord-Bot` directory and install the dependencies:
+
 ```bash
 npm install
 ```
+
 Create a `.env` file in the `Discord-Bot` directory with your Discord bot token, client ID, guild ID, owner ID, and website URL:
 
 Get your discord token from https://discord.com/developers/applications
