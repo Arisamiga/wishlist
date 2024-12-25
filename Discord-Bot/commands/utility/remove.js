@@ -32,10 +32,10 @@ module.exports = {
                 components: [row]
             });
 
-            async function uploadChanges() {
+            async function uploadChanges(itemRemoved) {
                 try {
                     await git.add('../');
-                    await git.commit(`Removed ${choice.values[0]} from wishlist`);
+                    await git.commit(`Removed ${itemRemoved} from wishlist`);
                     await git.push('origin', 'main');
                     console.log('Changes pushed to GitHub successfully.');
                 } catch (err) {
@@ -68,7 +68,7 @@ module.exports = {
                         return;
                     }
                     else{
-                        uploadChanges();
+                        uploadChanges(choice.values[0]);
                     }
                 });
 
