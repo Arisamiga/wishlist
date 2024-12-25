@@ -37,9 +37,10 @@ module.exports = {
                     await git.add('../');
                     await git.commit(`Removed ${itemRemoved} from wishlist`);
                     await git.push('origin', 'main');
-                    console.log('Changes pushed to GitHub successfully.');
+                    await interaction.editReply({ content: `Removed Item and Updated: ${choice.values[0]}`, components: [] });
+                    await choice.reply({ content: 'Item removed', ephemeral: true });
                 } catch (err) {
-                    console.error('Failed to push changes to GitHub:', err);
+                    await interaction.editReply({ content: `Failed to Remove and Upload Item: ${choice.values[0]}`, components: [] });
                 }
             }
 
@@ -65,6 +66,8 @@ module.exports = {
                 fs.writeFile('../Website/index.html', root.toString(), (err) => {
                     if (err) {
                         console.error(err);
+                        choice.reply({ content: 'Failed to remove item', ephemeral: true });
+                        interaction.editReply({ content: `Failed to Remove and Upload Item: ${choice.values[0]}`, components: [] });
                         return;
                     }
                     else{
@@ -72,9 +75,8 @@ module.exports = {
                     }
                 });
 
-                await choice.reply({ content: 'Item removed', ephemeral: true });
+                
 
-                await interaction.editReply({ content: `Removed Item: ${choice.values[0]}`, components: [] });
                 
             } catch (e) {
                 await interaction.editReply({ content: 'Choice not received within 1 minute, cancelling', components: [] });

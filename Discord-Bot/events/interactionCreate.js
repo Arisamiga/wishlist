@@ -55,13 +55,28 @@ module.exports = {
                     item.querySelector('.item-price').set_content("€" + price);
                     root.querySelector('.wishlist').appendChild(item);
 
+                    async function uploadChanges(itemRemoved) {
+                        try {
+                            await git.add('../');
+                            await git.commit(`Added ${itemRemoved} to the wishlist`);
+                            await git.push('origin', 'main');
+                            await interaction.reply({ content: `Item: ${name} Added and Uploaded!`, ephemeral: false });
+                        } catch (err) {
+                            await interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });
+                        }
+                    }
+
                     fs.writeFile('../Website/index.html', root.toString(), (err) => {
                         if (err) {
                             console.error(err);
+
+                            interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });
                             return;
                         }
+                        else{
+                            uploadChanges(name);
+                        }
                     });
-                    await interaction.reply({ content: `Item: ${name} Added!`, ephemeral: false });
                 });
             }
         }
