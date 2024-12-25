@@ -1,6 +1,8 @@
 const { Events, MessageFlags } = require('discord.js');
 const HTMLParser = require('node-html-parser');
 const fs = require('fs');
+const simpleGit = require('simple-git');
+const git = simpleGit();
 module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
@@ -62,6 +64,7 @@ module.exports = {
                             await git.push('origin', 'main');
                             await interaction.reply({ content: `Item: ${name} Added and Uploaded!`, ephemeral: false });
                         } catch (err) {
+                            console.error(err);
                             await interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });
                         }
                     }
