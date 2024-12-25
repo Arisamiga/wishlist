@@ -1,6 +1,8 @@
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, ActionRowBuilder } = require('discord.js');
 const HTMLParser = require('node-html-parser');
 const fs = require('fs');
+const simpleGit = require('simple-git');
+const git = simpleGit();
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('remove')
@@ -30,6 +32,17 @@ module.exports = {
                 components: [row]
             });
 
+            async function uploadChanges() {
+                try {
+                    await git.add('../');
+                    await git.commit(`Removed ${choice.values[0]} from wishlist`);
+                    await git.push('origin', 'main');
+                    console.log('Changes pushed to GitHub successfully.');
+                } catch (err) {
+                    console.error('Failed to push changes to GitHub:', err);
+                }
+            }
+
             const collectorFilter = i => i.user.id === interaction.user.id;
 
             try {
@@ -53,6 +66,9 @@ module.exports = {
                     if (err) {
                         console.error(err);
                         return;
+                    }
+                    else{
+                        uploadChanges();
                     }
                 });
 
