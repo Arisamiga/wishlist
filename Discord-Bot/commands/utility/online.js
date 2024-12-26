@@ -1,11 +1,11 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-
+require('dotenv').config()
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('online')
         .setDescription('Check if the website is reachable'),
     async execute(interaction) {
-        fetch('https://wishlist.arisamiga.rocks')
+        fetch(process.env.WEBSITE_URL)
             .then(() => {
                 const embed = {
                     title: 'The website is online!',
@@ -13,7 +13,7 @@ module.exports = {
                 };
                 interaction.reply({ embeds: [embed] });
             })
-            .catch((error) => {
+            .catch(() => {
                 const embed = {
                     title: 'The website is offline!',
                     color: 0xff0000,
