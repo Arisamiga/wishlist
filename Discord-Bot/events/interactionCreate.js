@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { Events, MessageFlags } = require('discord.js');
 const HTMLParser = require('node-html-parser');
 const fs = require('fs');
@@ -6,6 +7,12 @@ const git = simpleGit();
 module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
+        if(!interaction.guild) return;
+        if (interaction.user.id !== process.env.OWNER_ID) {
+            interaction.reply({ content: 'You do not have permission to use this command!', ephemeral: true });
+            return;
+        }
+
         if (interaction.isChatInputCommand()){
 
             const command = interaction.client.commands.get(interaction.commandName);
