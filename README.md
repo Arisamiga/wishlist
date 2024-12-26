@@ -60,6 +60,7 @@ The Discord bot allows users to manage the wishlist through various commands and
 - `ready.js`: Sets the bot's presence and logs when the bot is ready.
 
 ### Installation
+
 ```
 You have to install NodeJS and Git.
 Create a folder.
