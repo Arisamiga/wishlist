@@ -66,6 +66,9 @@ module.exports = {
 
                     async function uploadChanges(itemRemoved) {
                         try {
+                            // Check if there are any updates to the repo then pull
+                            await git.pull('origin', 'main');
+
                             await git.add('../');
                             await git.commit(`Added ${itemRemoved} to the wishlist`);
                             await git.push('origin', 'main');
