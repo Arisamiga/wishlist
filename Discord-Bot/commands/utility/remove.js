@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder, ActionRowBuilder } = require('discord.js');
 const HTMLParser = require('node-html-parser');
 const fs = require('fs');
