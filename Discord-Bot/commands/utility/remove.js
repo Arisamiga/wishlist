@@ -20,9 +20,9 @@ module.exports = {
 			.setPlaceholder('Make a selection!')
             .addOptions(items.map((item) => {
                 return new StringSelectMenuOptionBuilder()
-                    .setLabel(item.querySelector('.item-name').text)
-                    .setValue(item.querySelector('.item-name').text)
-                    .setDescription(item.querySelector('.item-description').text)
+                    .setLabel(item.querySelector('.item-name').text.slice(0, 100))
+                    .setValue(item.querySelector('.item-name').text.slice(0, 100))
+                    .setDescription(item.querySelector('.item-description').text.slice(0, 100))
             }));
             const row = new ActionRowBuilder()
 			    .addComponents(select);

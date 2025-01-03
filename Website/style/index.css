@@ -57,6 +57,7 @@ h1 {
 .item-description {
     margin: 5px 0;
     color: #666;
+    overflow-wrap: anywhere;
 }
 .item-price {
     color: #ff4500;
