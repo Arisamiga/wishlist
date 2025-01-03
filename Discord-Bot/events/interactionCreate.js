@@ -96,7 +96,9 @@ module.exports = {
                             return;
                         }
                         else {
-                            if (process.env.ENABLE_GIT_UPDATES == 'false'){
+                            const enableGitUpdates = process.env.ENABLE_GIT_UPDATES && process.env.ENABLE_GIT_UPDATES.toLowerCase() === 'false';
+
+                            if (enableGitUpdates){
                                 interaction.reply({ content: `Item: ${name} Added!`, ephemeral: false });
                                 return;
                             }
