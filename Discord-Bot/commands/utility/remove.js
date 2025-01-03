@@ -75,9 +75,9 @@ module.exports = {
                         return;
                     }
                     else {
-                        const enableGitUpdates = process.env.ENABLE_GIT_UPDATES && process.env.ENABLE_GIT_UPDATES.toLowerCase() === 'false';
+                        const enableGitUpdates = process.env.ENABLE_GIT_UPDATES && process.env.ENABLE_GIT_UPDATES.toLowerCase() !== 'false';;
 
-                        if (enableGitUpdates){
+                        if (!enableGitUpdates){
                             choice.reply({ content: 'Item removed', ephemeral: true });
                             interaction.editReply({ content: `Removed Item: ${choice.values[0]}`, components: [] });
                             return;
