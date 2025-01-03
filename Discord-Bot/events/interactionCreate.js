@@ -97,7 +97,6 @@ module.exports = {
                         }
                         else {
                             const enableGitUpdates = process.env.ENABLE_GIT_UPDATES && process.env.ENABLE_GIT_UPDATES.toLowerCase() !== 'false';
-                            console.log(process.env.ENABLE_GIT_UPDATES.toLowerCase(), enableGitUpdates)
                             if (!enableGitUpdates) {
                                 interaction.reply({ content: `Item: ${name} Added!`, ephemeral: false });
                                 return;
