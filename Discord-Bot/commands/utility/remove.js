@@ -75,7 +75,7 @@ module.exports = {
                         return;
                     }
                     else {
-                        if (!process.env.ENABLE_GIT_UPDATES){
+                        if (!process.env.ENABLE_GIT_UPDATES == 'false'){
                             choice.reply({ content: 'Item removed', ephemeral: true });
                             interaction.editReply({ content: `Removed Item: ${choice.values[0]}`, components: [] });
                             return;

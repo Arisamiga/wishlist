@@ -96,7 +96,7 @@ module.exports = {
                             return;
                         }
                         else {
-                            if (!process.env.ENABLE_GIT_UPDATES){
+                            if (process.env.ENABLE_GIT_UPDATES == 'false'){
                                 interaction.reply({ content: `Item: ${name} Added!`, ephemeral: false });
                                 return;
                             }
