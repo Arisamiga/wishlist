@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist</title>
     <link href="./style/index.css" rel="stylesheet">
+    <script src="./script/index.js" defer></script>
 </head>
 <body>
     <img src="./images/avatar.gif" alt="Avatar" class="avatar">
@@ -12,6 +13,12 @@
     <div class="wishlist-container">
         <h1>My Wishlist</h1>
         <p class="description">Here is a list of items I want to get:</p>
+
+        <select name="sort" id="sort" class="sort">
+            <option value="name">Sort by Name</option>
+            <option value="price">Sort by Price</option>
+        </select>
+
         <ul class="wishlist">
             
             <li class="wishlist-item">
