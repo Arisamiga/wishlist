@@ -44,6 +44,12 @@ module.exports = {
                     const image = interaction.fields.getTextInputValue('newItemImage');
                     const price = interaction.fields.getTextInputValue('newItemPrice');
 
+                    // Check if the image is a valid URL
+                    if (!image.match(/\.(jpeg|jpg|gif|png|webp)(\?.*)?$/)) {
+                        await interaction.reply({ content: `Invalid Image URL. Make sure to use either (.jpeg, .jpg, .gif, .png, or .webp)`, ephemeral: true });
+                        return;
+                    }
+
                     // Check if name already exists
                     const items = root.querySelectorAll('.wishlist-item');
                     const itemExists = items.find(item => item.querySelector('.item-name').text === name);
