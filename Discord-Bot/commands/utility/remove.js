@@ -73,7 +73,12 @@ module.exports = {
                         interaction.editReply({ content: `Failed to Remove and Upload Item: ${choice.values[0]}`, components: [] });
                         return;
                     }
-                    else{
+                    else {
+                        if (!process.env.ENABLE_GIT_UPDATES){
+                            choice.reply({ content: 'Item removed', ephemeral: true });
+                            interaction.editReply({ content: `Removed Item: ${choice.values[0]}`, components: [] });
+                            return;
+                        }
                         if(uploadChanges(choice.values[0])) {
                             interaction.editReply({ content: `Removed Item and Updated: ${choice.values[0]}`, components: [] });
                             choice.reply({ content: 'Item removed', ephemeral: true });

@@ -20,6 +20,12 @@ module.exports = {
             .setStyle(TextInputStyle.Paragraph)
             .setRequired(true);
 
+        const itemImage = new TextInputBuilder()
+            .setCustomId('newItemImage')
+            .setLabel("What is the Item's Image URL?")
+            .setStyle(TextInputStyle.Short)
+            .setRequired(true);
+
         const itemPrice = new TextInputBuilder()
             .setCustomId('newItemPrice')
             .setLabel("What is the Item's Price?")
@@ -33,10 +39,12 @@ module.exports = {
         const secondActionRow = new ActionRowBuilder()
             .addComponents(itemDescription);
         const thirdActionRow = new ActionRowBuilder()
+            .addComponents(itemImage);
+        const fourthActionRow = new ActionRowBuilder()
             .addComponents(itemPrice);
             
         // Add inputs to the modal
-        modal.addComponents(firstActionRow, secondActionRow, thirdActionRow);
+        modal.addComponents(firstActionRow, secondActionRow, thirdActionRow, fourthActionRow);
 
         // Show the modal to the user
         await interaction.showModal(modal);

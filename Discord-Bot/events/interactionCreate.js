@@ -41,6 +41,7 @@ module.exports = {
                     const root = HTMLParser.parse(data);
                     const name = interaction.fields.getTextInputValue('newItemName');
                     let description = interaction.fields.getTextInputValue('newItemDescription');
+                    const image = interaction.fields.getTextInputValue('newItemImage');
                     const price = interaction.fields.getTextInputValue('newItemPrice');
 
                     // Check if name already exists
@@ -51,7 +52,9 @@ module.exports = {
                         return;
                     }
 
-                    const item = root.querySelector('.wishlist-item').clone();
+                    const wishlist = root.querySelector('.wishlist-item').clone();
+                    wishlist.querySelector('.item-img > img').setAttribute('src', image);
+                    const item = wishlist.querySelector('.item-details')
                     item.querySelector('.item-name').set_content(name);
 
                     // Check if the description has a link then add the link
@@ -62,7 +65,7 @@ module.exports = {
                         item.querySelector('.item-description').set_content(description);
                     }
                     item.querySelector('.item-price').set_content("€" + price);
-                    root.querySelector('.wishlist').appendChild(item);
+                    root.querySelector('.wishlist').appendChild(wishlist);
 
                     async function uploadChanges(itemRemoved) {
                         try {
@@ -87,6 +90,11 @@ module.exports = {
                             return;
                         }
                         else {
+                            if (!process.env.ENABLE_GIT_UPDATES){
+                                interaction.reply({ content: `Item: ${name} Added!`, ephemeral: false });
+                                return;
+                            }
+
                             if(uploadChanges(name))
                                 interaction.reply({ content: `Item: ${name} Added and Uploaded!`, ephemeral: false });
                             else

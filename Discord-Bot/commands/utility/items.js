@@ -13,20 +13,25 @@ module.exports = {
             }
             const root = HTMLParser.parse(data);
             const items = root.querySelectorAll('.wishlist-item');
-            const embed = {
-                title: 'Current Wishlist Items',
-                fields: [],
-            };
+            const embeds = [];
             items.forEach((item) => {
                 const name = item.querySelector('.item-name').text;
                 const description = item.querySelector('.item-description').text;
+                const image = item.querySelector('.item-img > img').getAttribute('src');
                 const price = item.querySelector('.item-price').text;
-                embed.fields.push({
-                    name: name,
-                    value: `${description}\nPrice: ${price}`,
-                });
+
+                const embed = {
+                    title: name,
+                    description: `${description}\nPrice: ${price}`,
+                    image: {
+                        url: image
+                    }
+                };
+
+                embeds.push(embed);
             });
-            interaction.reply({ embeds: [embed] });
+
+            interaction.reply({ embeds: embeds });
         });
     },
 };
