@@ -36,14 +36,27 @@ module.exports = {
             async function uploadChanges(itemRemoved) {
                 try {
                     // Check if there are any updates to the repo then pull
+                    console.log('Pulling latest changes from the repository...');
                     await git.pull('origin', process.env.GIT_BRANCH);
-
+                    console.log('Successfully pulled latest changes.');
+                    
                     // Add changes, commit, and push
+                    console.log('Adding changes...');
                     await git.add('../');
+                    console.log('Changes added.');
+                    
+                    console.log(`Committing changes with message: "Removed ${itemRemoved} from wishlist"`);
                     await git.commit(`Removed ${itemRemoved} from wishlist`);
+                    console.log('Changes committed.');
+                    
+                    console.log('Pushing changes to the repository...');
                     await git.push('origin', process.env.GIT_BRANCH);
+                    console.log('Changes pushed successfully.');
+                    
                     return true;
                 } catch (err) {
+
+                    console.error(err);
                     return false;
                 }
             }
