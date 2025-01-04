@@ -70,7 +70,7 @@ Press enter.
 After that type in: git clone https://github.com/Arisamiga/wishlist.git
 Press enter.
 When you see all Github files in your folder you installed the bot files succesfully.
-After that you would want to edit the config.json.
+Make sure to Navigate to the 'Discord-Bot' directory by typing: cd Discord-Bot
 ```
 
 Navigate to the `Discord-Bot` directory and install the dependencies:
@@ -100,4 +100,4 @@ Open `Website/index.html` in your browser to view the wishlist.
 
 ## Contributing
 
-Feel free to open issues or submit pull requests if you have any suggestions or improvements at https://github.com/Arisamiga/wishlist
+Feel free to open issues or submit pull requests if you have any suggestions, improvements or issues at https://github.com/Arisamiga/wishlist
