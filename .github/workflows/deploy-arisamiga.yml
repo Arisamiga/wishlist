@@ -42,5 +42,9 @@ jobs:
         run: |
           cd gh-pages
           git add .
-          git commit -m "Deploy Arisamiga branch"
-          git push origin gh-pages
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Deploy Arisamiga branch"
+            git push origin gh-pages
+          else
+            echo "No changes to commit"
+          fi
