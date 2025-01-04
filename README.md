@@ -90,6 +90,7 @@ GUILD_ID=your-guild-id
 OWNER_ID=your-owner-id
 WEBSITE_URL=your-website-url
 ENABLE_GIT_UPDATES=true (If you want to enable Git updates)
+GIT_BRANCH=your-branch-name
 ```
 
 Use either use ```npm start``` or ```node index.js``` to start the bot in your command prompt!
