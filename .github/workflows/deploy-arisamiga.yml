@@ -36,7 +36,7 @@ jobs:
 
       - name: Copy contents to root folder
         run: |
-          rsync -av --delete ./Website/ gh-pages/
+          rsync -av --delete ./Website/ gh-pages/Website/
 
       - name: Commit and push changes
         run: |
