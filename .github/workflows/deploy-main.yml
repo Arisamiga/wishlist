@@ -1,0 +1,50 @@
+name: Deploy main branch to Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-main"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Checkout gh-pages branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone --depth 1 --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+
+      - name: Create demo directory
+        run: |
+          mkdir -p gh-pages/demo
+
+      - name: Copy contents to demo folder
+        run: |
+          rsync -av --delete ./Website/ gh-pages/demo/
+
+      - name: Commit and push changes
+        run: |
+          cd gh-pages
+          git add .
+          git commit -m "Deploy main branch to demo"
+          git push origin gh-pages
