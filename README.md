@@ -8,9 +8,9 @@
 
 ### This project consists of a website and a Discord bot that work together to manage a wishlist.
 
-<img src="https://i.imgur.com/P6cl2JD.png" alt="Wishlist" width="100%">
+<img src="https://i.imgur.com/avdWmU9.png" alt="Wishlist" width="100%">
 
-<img src="https://i.imgur.com/HowUixb.png" alt="Wishlist Dark Mode" width="100%">
+<img src="https://i.imgur.com/w1Amwzc.png" alt="Wishlist Dark Mode" width="100%">
 
 ## Project Structure
 
