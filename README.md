@@ -6,6 +6,8 @@
   
 [![CodeFactor](https://www.codefactor.io/repository/github/arisamiga/wishlist/badge?s=735c3ecf603b84a7e693f20d4d06b5256f93bbc2)](https://www.codefactor.io/repository/github/arisamiga/wishlist)
 
+Demo: https://wishlist.arisamiga.rocks/demo/
+
 ### This project consists of a website and a Discord bot that work together to manage a wishlist.
 
 <img src="https://i.imgur.com/avdWmU9.png" alt="Wishlist" width="100%">
