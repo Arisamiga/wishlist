@@ -21,14 +21,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages Branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git clone --depth 1 --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
-          rsync -av --delete ./Website/ gh-pages/demo/
+          rsync -av --delete ./Website/ gh-pages/website/demo/
           cd gh-pages
           git add .
           git commit -m "Deploy main branch to demo"
