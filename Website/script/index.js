@@ -1,4 +1,5 @@
-document.getElementById("sort").addEventListener("change", function() {
+
+function sortList() {
     var sort = document.getElementById("sort").value;
     var items = document.querySelectorAll('.wishlist-item');
     var itemsArray = Array.prototype.slice.call(items, 0);
@@ -34,4 +35,12 @@ document.getElementById("sort").addEventListener("change", function() {
             itemsArray.forEach(item => item.classList.remove('fade-in'));
         }, 500); // Match the timeout with the animation duration
     }, 500); // Match the timeout with the animation duration
+}
+
+document.getElementById("sort").addEventListener("change", function() {
+    sortList();
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    sortList();
 });
