@@ -27,7 +27,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git clone --depth 1 --branch gh-pages https://github.com/${{ github.repository }} gh-pages
+          git clone --depth 1 --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
           rsync -av --delete ./Website/ gh-pages/demo/
           cd gh-pages
           git add .
