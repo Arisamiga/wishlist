@@ -100,4 +100,4 @@ Open `Website/index.html` in your browser to view the wishlist.
 
 ## Contributing
 
-Feel free to open issues or submit pull requests if you have any suggestions or improvements at https://github.com/Arisamiga/wishlist
+Feel free to open issues or submit pull requests if you have any suggestions, improvements or issues at https://github.com/Arisamiga/wishlist
