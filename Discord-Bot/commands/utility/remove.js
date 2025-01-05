@@ -38,20 +38,18 @@ module.exports = {
                     // Check if there are any updates to the repo then pull
                     const status = await git.status();
                     let hasChanges = status.files.length > 0;
-            
+
                     if (hasChanges) {
-                        await git.add('../');
-                        await git.commit('Stashing changes before pull');
                         await git.stash();
                     }
-            
+
                     await git.pull('origin', process.env.GIT_BRANCH);
-            
+
                     const stashList = await git.stashList();
                     if (stashList.total > 0) {
                         await git.stash(['pop']);
                     }
-            
+
                     // Add changes, commit, and push
                     await git.add('../');
                     await git.commit(`Removed ${itemRemoved} from wishlist`);

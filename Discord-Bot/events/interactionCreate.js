@@ -80,8 +80,6 @@ module.exports = {
                             let hasChanges = status.files.length > 0;
                     
                             if (hasChanges) {
-                                await git.add('../');
-                                await git.commit('Stashing changes before pull');
                                 await git.stash();
                             }
                     
@@ -92,9 +90,13 @@ module.exports = {
                                 await git.stash(['pop']);
                             }
                     
+                            // Add changes, commit, and push
                             await git.add('../');
-                            await git.commit(`Added ${itemRemoved} to the wishlist`);
-                            await git.push('origin', process.env.GIT_BRANCH);
+                            const finalStatus = await git.status();
+                            if (finalStatus.files.length > 0) {
+                                await git.commit(`Added ${itemRemoved} to the wishlist`);
+                                await git.push('origin', process.env.GIT_BRANCH);
+                            }
                             return true;
                         } catch (err) {
                             console.error(err);
