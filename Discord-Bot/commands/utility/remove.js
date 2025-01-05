@@ -37,7 +37,9 @@ module.exports = {
                 try {
                     // Check if there are any updates to the repo then pull
                     const status = await git.status();
-                    if (status.files.length > 0) {
+                    let hasChanges = status.files.length > 0;
+            
+                    if (hasChanges) {
                         await git.add('../');
                         await git.commit('Stashing changes before pull');
                         await git.stash();
@@ -45,7 +47,8 @@ module.exports = {
             
                     await git.pull('origin', process.env.GIT_BRANCH);
             
-                    if (status.files.length > 0) {
+                    const stashList = await git.stashList();
+                    if (stashList.total > 0) {
                         await git.stash(['pop']);
                     }
             
