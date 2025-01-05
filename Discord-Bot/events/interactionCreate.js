@@ -76,8 +76,12 @@ module.exports = {
                     async function uploadChanges(itemRemoved) {
                         try {
                             // Check if there are any updates to the repo then pull
+                            await git.add('../');
+                            await git.commit('Stashing changes before pull');
+                            await git.stash();
                             await git.pull('origin', process.env.GIT_BRANCH);
-
+                            await git.stash(['pop']);
+                    
                             await git.add('../');
                             await git.commit(`Added ${itemRemoved} to the wishlist`);
                             await git.push('origin', process.env.GIT_BRANCH);
@@ -87,22 +91,20 @@ module.exports = {
                             return false;
                         }
                     }
-
-                    fs.writeFile('../Website/index.html', root.toString(), (err) => {
+                    
+                    fs.writeFile('../Website/index.html', root.toString(), async (err) => {
                         if (err) {
                             console.error(err);
-
                             interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });
                             return;
-                        }
-                        else {
+                        } else {
                             const enableGitUpdates = process.env.ENABLE_GIT_UPDATES && process.env.ENABLE_GIT_UPDATES.toLowerCase() !== 'false';
                             if (!enableGitUpdates) {
                                 interaction.reply({ content: `Item: ${name} Added!`, ephemeral: false });
                                 return;
                             }
-
-                            if(uploadChanges(name))
+                    
+                            if (await uploadChanges(name))
                                 interaction.reply({ content: `Item: ${name} Added and Uploaded!`, ephemeral: false });
                             else
                                 interaction.reply({ content: `Failed to Update and Upload Item: ${name}`, ephemeral: true });

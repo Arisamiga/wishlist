@@ -36,79 +36,66 @@ module.exports = {
             async function uploadChanges(itemRemoved) {
                 try {
                     // Check if there are any updates to the repo then pull
-                    console.log('Pulling latest changes from the repository...');
-                    await git.pull('origin', process.env.GIT_BRANCH);
-                    console.log('Successfully pulled latest changes.');
-                    
-                    // Add changes, commit, and push
-                    console.log('Adding changes...');
                     await git.add('../');
-                    console.log('Changes added.');
-                    
-                    console.log(`Committing changes with message: "Removed ${itemRemoved} from wishlist"`);
+                    await git.commit('Stashing changes before pull');
+                    await git.stash();
+                    await git.pull('origin', process.env.GIT_BRANCH);
+                    await git.stash(['pop']);
+            
+                    // Add changes, commit, and push
+                    await git.add('../');
                     await git.commit(`Removed ${itemRemoved} from wishlist`);
-                    console.log('Changes committed.');
-                    
-                    console.log('Pushing changes to the repository...');
                     await git.push('origin', process.env.GIT_BRANCH);
-                    console.log('Changes pushed successfully.');
-                    
                     return true;
                 } catch (err) {
-
                     console.error(err);
                     return false;
                 }
             }
-
+            
             const collectorFilter = i => i.user.id === interaction.user.id;
-
+            
             try {
                 const choice = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
-
+            
                 if (!choice.isStringSelectMenu()) {
                     await choice.reply({ content: 'Invalid selection, cancelling', ephemeral: true });
                     return;
                 }
-
+            
                 const item = items.find(item => item.querySelector('.item-name').text === choice.values[0]);
-
+            
                 if (!item) {
                     await choice.reply({ content: 'Item not found, cancelling', ephemeral: true });
                     return;
                 }
-
+            
                 item.remove();
-
-                fs.writeFile('../Website/index.html', root.toString(), (err) => {
+            
+                fs.writeFile('../Website/index.html', root.toString(), async (err) => {
                     if (err) {
                         console.error(err);
                         choice.reply({ content: 'Failed to remove item', ephemeral: true });
                         interaction.editReply({ content: `Failed to Remove and Upload Item: ${choice.values[0]}`, components: [] });
                         return;
-                    }
-                    else {
-                        const enableGitUpdates = process.env.ENABLE_GIT_UPDATES && process.env.ENABLE_GIT_UPDATES.toLowerCase() !== 'false';;
-
-                        if (!enableGitUpdates){
+                    } else {
+                        const enableGitUpdates = process.env.ENABLE_GIT_UPDATES && process.env.ENABLE_GIT_UPDATES.toLowerCase() !== 'false';
+            
+                        if (!enableGitUpdates) {
                             choice.reply({ content: 'Item removed', ephemeral: true });
                             interaction.editReply({ content: `Removed Item: ${choice.values[0]}`, components: [] });
                             return;
                         }
-                        if(uploadChanges(choice.values[0])) {
+            
+                        if (await uploadChanges(choice.values[0])) {
                             interaction.editReply({ content: `Removed Item and Updated: ${choice.values[0]}`, components: [] });
                             choice.reply({ content: 'Item removed', ephemeral: true });
-                        }
-                        else {
+                        } else {
                             choice.reply({ content: 'Failed to remove item', ephemeral: true });
                             interaction.editReply({ content: `Failed to Remove and Upload Item: ${choice.values[0]}`, components: [] });
                         }
                     }
                 });
-
-                
-
-                
             } catch (e) {
                 await interaction.editReply({ content: 'Choice not received within 1 minute, cancelling', components: [] });
             }
