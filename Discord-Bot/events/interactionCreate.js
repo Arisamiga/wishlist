@@ -76,12 +76,19 @@ module.exports = {
                     async function uploadChanges(itemRemoved) {
                         try {
                             // Check if there are any updates to the repo then pull
-                            await git.add('../');
-                            await git.commit('Stashing changes before pull');
-                            await git.stash();
+                            const status = await git.status();
+                            if (status.files.length > 0) {
+                                await git.add('../');
+                                await git.commit('Stashing changes before pull');
+                                await git.stash();
+                            }
+
                             await git.pull('origin', process.env.GIT_BRANCH);
-                            await git.stash(['pop']);
-                    
+
+                            if (status.files.length > 0) {
+                                await git.stash(['pop']);
+                            }
+
                             await git.add('../');
                             await git.commit(`Added ${itemRemoved} to the wishlist`);
                             await git.push('origin', process.env.GIT_BRANCH);
