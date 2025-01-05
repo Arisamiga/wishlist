@@ -96,6 +96,29 @@ h1 {
 .sort:hover {
     border-color: #72b2dd;
 }
+
+.top-strip {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #45a049;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.top-strip a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.top-strip a:hover {
+    text-decoration: underline;
+}
+
 .dark-mode {
     background-color: #333;
     color: #f0f8ff;
@@ -138,6 +161,10 @@ h1 {
 .dark-mode-button:hover {
     background-color: #45a049;
 }
+.dark-mode .top-strip {
+    background-color: #5a5a5a;
+}
+
 .avatar {
     width: 6rem; 
     display: block;
