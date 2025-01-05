@@ -96,6 +96,21 @@ h1 {
 .sort:hover {
     border-color: #72b2dd;
 }
+
+.footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.8em;
+    color: #666;
+}
+.footer a {
+    color: #666;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: #333;
+}
+
 .dark-mode {
     background-color: #333;
     color: #f0f8ff;
@@ -138,6 +153,16 @@ h1 {
 .dark-mode-button:hover {
     background-color: #45a049;
 }
+.dark-mode .footer {
+    color: #f0f8ff;
+}
+.dark-mode .footer a {
+    color: #f0f8ff;
+}
+.dark-mode .footer a:hover {
+    color: #72b2dd;
+}
+
 .avatar {
     width: 6rem; 
     display: block;
@@ -153,6 +178,8 @@ h1 {
     flex-direction: column;
     align-items: center;
 }
+
+
 /* Keyframes */
 @keyframes fadeOut {
     from {
@@ -172,5 +199,13 @@ h1 {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Media Tags */
+@media (max-width: 600px) {
+    .wishlist-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

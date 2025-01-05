@@ -1,12 +1,8 @@
 # Wishlist
 
-<a href="https://github.com/Arisamiga/wishlist//issues">
-<img alt="Issues" src="https://img.shields.io/github/issues/Arisamiga/wishlist?color=0088ff" />
-</a>
-  
-[![CodeFactor](https://www.codefactor.io/repository/github/arisamiga/wishlist/badge?s=735c3ecf603b84a7e693f20d4d06b5256f93bbc2)](https://www.codefactor.io/repository/github/arisamiga/wishlist)
+> Hello! The branch "Arisamiga" is for personal use. If you want to use the original version, please visit the original branch at https://github.com/Arisamiga/wishlist
 
-### This project consists of a website and a Discord bot that work together to manage a wishlist.
+> Any problems or issues with this branch is not the responsibility of the original author.
 
 <img src="https://i.imgur.com/avdWmU9.png" alt="Wishlist" width="100%">
 
